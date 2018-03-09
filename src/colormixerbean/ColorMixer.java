@@ -27,8 +27,8 @@ public class ColorMixer extends JMenuItem {
         green = 255;
         blue = 255;
         brightness = 0.0f;
-        mPcs= new PropertyChangeSupport(this);
-        mix = new Color(255,255,255);
+        mPcs = new PropertyChangeSupport(this);
+        mix = new Color(255, 255, 255);
 
     }
 
@@ -154,18 +154,13 @@ public class ColorMixer extends JMenuItem {
     public JLabel getlblColor() {
         return this.labColor;
     }
-    private int red;
-    private int green;
-    private int blue;
-    private float brightness;
-    private Color mix;
 
     /**
      *
      * @return color with brightness applied
      */
     public Color getMix() {
-        Color old = new Color(mix.getRed(),mix.getGreen(),mix.getBlue());
+        Color old = new Color(mix.getRed(), mix.getGreen(), mix.getBlue());
         int redBright = (int) (getRed() * (100 - getBrightness()) / 100);
         int greenBright = (int) (getGreen() * (100 - getBrightness()) / 100);
         int blueBright = (int) (getBlue() * (100 - getBrightness()) / 100);
@@ -244,14 +239,19 @@ public class ColorMixer extends JMenuItem {
         getMix();
     }
 
-    public void setMixer(Color c, float brightness) {
+    public void setMix(Color c, float brightness) {
         this.brightness = brightness;
         this.red = c.getRed();
         this.green = c.getGreen();
         this.blue = c.getBlue();
         this.mix = getMix();
     }
-
+    
+    private int red;
+    private int green;
+    private int blue;
+    private float brightness;
+    private Color mix;
     private javax.swing.JLabel lblBrightness;
     private javax.swing.JLabel lblred;
     private javax.swing.JLabel lblGreen;
