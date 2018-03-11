@@ -12,12 +12,13 @@ import java.beans.EventSetDescriptor;
 import java.beans.IntrospectionException;
 import java.beans.MethodDescriptor;
 import java.beans.PropertyDescriptor;
+import java.beans.SimpleBeanInfo;
 
 /**
  *
  * @author ma8521e
  */
-public class ColorMixerBeanInfo implements BeanInfo {
+public class ColorMixerBeanInfo extends SimpleBeanInfo {
 
     @Override
     public BeanDescriptor getBeanDescriptor() {
@@ -55,22 +56,18 @@ public class ColorMixerBeanInfo implements BeanInfo {
         }
     }
 
-    @Override
     public int getDefaultPropertyIndex() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public MethodDescriptor[] getMethodDescriptors() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public BeanInfo[] getAdditionalBeanInfo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public Image getIcon(int iconKind) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

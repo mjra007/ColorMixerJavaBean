@@ -18,7 +18,6 @@ import javax.swing.JScrollBar;
  */
 public class ColorMixer extends JMenuItem {
 
-    private PropertyChangeSupport mPcs;
 
     public ColorMixer() {
         initComponents();
@@ -27,7 +26,6 @@ public class ColorMixer extends JMenuItem {
         green = 255;
         blue = 255;
         brightness = 0.0f;
-        mPcs = new PropertyChangeSupport(this);
         mix = new Color(255, 255, 255);
 
     }
@@ -154,20 +152,14 @@ public class ColorMixer extends JMenuItem {
     public JLabel getlblColor() {
         return this.labColor;
     }
+    public Color getMix(){
+        return mix;
+    }
 
     /**
      *
      * @return color with brightness applied
      */
-    public Color getMix() {
-        Color old = new Color(mix.getRed(), mix.getGreen(), mix.getBlue());
-        int redBright = (int) (getRed() * (100 - getBrightness()) / 100);
-        int greenBright = (int) (getGreen() * (100 - getBrightness()) / 100);
-        int blueBright = (int) (getBlue() * (100 - getBrightness()) / 100);
-        this.mix = new Color(redBright, greenBright, blueBright);
-        this.mPcs.firePropertyChange("mix", old, mix);
-        return mix;
-    }
 
     /**
      *
@@ -211,40 +203,41 @@ public class ColorMixer extends JMenuItem {
 
     public void setRed(int r) {
         this.red = r;
-        getMix();
+        setColor(new Color(r,getColor().getGreen(), getColor().getBlue()));
     }
 
     public void setGreen(int g) {
         this.green = g;
-        getMix();
+        setColor(new Color(getColor().getRed(),g,getColor().getBlue()));
 
     }
 
     public void setBlue(int b) {
         this.blue = b;
-        getMix();
+        setColor(new Color(getColor().getRed(),getColor().getGreen(),b));
 
     }
 
     public void setBrightness(float f) {
         this.brightness = f;
-        getMix();
-
+        setColor(this.getColor());
     }
 
     public void setColor(Color c) {
         this.red = c.getRed();
         this.green = c.getGreen();
         this.blue = c.getBlue();
-        getMix();
+        setMix(c,getBrightness());
     }
 
     public void setMix(Color c, float brightness) {
-        this.brightness = brightness;
-        this.red = c.getRed();
-        this.green = c.getGreen();
-        this.blue = c.getBlue();
-        this.mix = getMix();
+        int redBright = (int) (getRed() * (100 - getBrightness()) / 100);
+        int greenBright = (int) (getGreen() * (100 - getBrightness()) / 100);
+        int blueBright = (int) (getBlue() * (100 - getBrightness()) / 100);
+        Color newColor = new Color(redBright, greenBright, blueBright);
+     
+        firePropertyChange("colormix", mix, newColor);
+        mix=newColor;
     }
     
     private int red;
