@@ -24,6 +24,7 @@ public class ColorMixerBeanInfo extends SimpleBeanInfo {
 
     @Override
     public PropertyDescriptor[] getPropertyDescriptors() {
+        System.out.println("sd");
         try {
             PropertyDescriptor red = new PropertyDescriptor("red",
                     myClass);
