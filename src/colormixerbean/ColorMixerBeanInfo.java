@@ -10,7 +10,6 @@ import java.beans.BeanDescriptor;
 import java.beans.BeanInfo;
 import java.beans.EventSetDescriptor;
 import java.beans.IntrospectionException;
-import java.beans.MethodDescriptor;
 import java.beans.PropertyDescriptor;
 import java.beans.SimpleBeanInfo;
 
@@ -20,56 +19,47 @@ import java.beans.SimpleBeanInfo;
  */
 public class ColorMixerBeanInfo extends SimpleBeanInfo {
 
-    @Override
-    public BeanDescriptor getBeanDescriptor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private final static Class myClass = ColorMixer.class;
 
-    @Override
-    public EventSetDescriptor[] getEventSetDescriptors() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getDefaultEventIndex() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public PropertyDescriptor[] getPropertyDescriptors() {
         try {
             PropertyDescriptor red = new PropertyDescriptor("red",
-                    ColorMixer.class, "getRed", "setRed");
+                    myClass);
             PropertyDescriptor green = new PropertyDescriptor("green",
-                    ColorMixer.class, "getGreen", "setRed");
+                    myClass);
             PropertyDescriptor blue = new PropertyDescriptor("blue",
-                    ColorMixer.class, "getBlue", "setBlue");
+                    myClass);
             PropertyDescriptor brightness = new PropertyDescriptor("brightness",
-                    ColorMixer.class, "getBrightness", "setBrightness");
-            PropertyDescriptor mix = new PropertyDescriptor("mix",
-                    ColorMixer.class, "getMix", "setMix");
+                    myClass);
+          PropertyDescriptor mix = new PropertyDescriptor("mix",
+                    myClass);
             PropertyDescriptor[] pds = new PropertyDescriptor[]{red, green, blue, brightness,mix};
             return pds;
         } catch (IntrospectionException ex) {
-            ex.printStackTrace();
             return null;
         }
     }
 
-    public int getDefaultPropertyIndex() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public MethodDescriptor[] getMethodDescriptors() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public BeanInfo[] getAdditionalBeanInfo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    @Override
+    // Get the image to use as an icon.  Note that the image files need to be included
+// in the bean's jar file.  One way is to put them in the same folder as the .java files
+// Another way is to create a folder (e.g. called icons) and in NetBeans 
+// right-click the project and choose Properties->Sources to add that folder 
+// to the Source Packages folders
     public Image getIcon(int iconKind) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        switch (iconKind) {
+            case BeanInfo.ICON_COLOR_16x16:
+                return loadImage("/colormixerbean/icons/paint-palette.png");
+            case BeanInfo.ICON_COLOR_32x32:
+                return loadImage("/colormixerbean/icons/paint-palette.png");
+            case BeanInfo.ICON_MONO_16x16:
+                return loadImage("/colormixerbean/icons/paint-palette.png");
+            case BeanInfo.ICON_MONO_32x32:
+                return loadImage("/colormixerbean/icons/paint-palette.png");
+        }
+        return null;
     }
 
 }

@@ -227,17 +227,20 @@ public class ColorMixer extends JMenuItem {
         this.red = c.getRed();
         this.green = c.getGreen();
         this.blue = c.getBlue();
-        setMix(c,getBrightness());
+        setMix(getColorBrightness(c,getBrightness()));
     }
 
-    public void setMix(Color c, float brightness) {
+    public Color getColorBrightness(Color c, float brightness){
         int redBright = (int) (getRed() * (100 - getBrightness()) / 100);
         int greenBright = (int) (getGreen() * (100 - getBrightness()) / 100);
         int blueBright = (int) (getBlue() * (100 - getBrightness()) / 100);
         Color newColor = new Color(redBright, greenBright, blueBright);
-     
-        firePropertyChange("colormix", mix, newColor);
-        mix=newColor;
+        return newColor;
+    }
+    
+    public void setMix(Color c) {
+        firePropertyChange("colormix", mix, c);
+        mix=c;
     }
     
     private int red;
